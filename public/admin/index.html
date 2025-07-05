@@ -4,17 +4,12 @@
     <meta charset="utf-8" />
     <title>Fog City Jazz CMS</title>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <link rel="cms-config-url" type="text/yaml" href="config.yml" />
   </head>
   <body>
     <div id="ncms-root"></div>
     <script>
-      CMS.init({
-        config: {
-          backend: {
-            name: 'github'
-          }
-        }
-      });
+      CMS.init();
     </script>
   </body>
 </html>
