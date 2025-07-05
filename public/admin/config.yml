@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: your-user/fog-city-jazz
+  repo: fogcity/fog-city-jazz
   branch: main
 media_folder: "public/uploads"
 public_folder: "/uploads"
@@ -13,6 +13,11 @@ collections:
     format: "frontmatter"
     extension: "md"
     fields:
-      - {label: Title, name: title, widget: string}
-      - {label: Description, name: description, widget: string, required: false}
-      - {label: Body, name: body, widget: markdown}
+      - { label: Title, name: title, widget: string }
+      - {
+          label: Description,
+          name: description,
+          widget: string,
+          required: false,
+        }
+      - { label: Body, name: body, widget: markdown }
