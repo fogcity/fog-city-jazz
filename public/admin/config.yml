@@ -2,8 +2,12 @@ backend:
   name: github
   repo: fogcity/fog-city-jazz
   branch: main
+  base_url: https://fog-city-jazz.vercel.app
+  auth_endpoint: oauth
+
 media_folder: "public/uploads"
 public_folder: "/uploads"
+
 collections:
   - name: pages
     label: Pages
@@ -13,11 +17,11 @@ collections:
     format: "frontmatter"
     extension: "md"
     fields:
-      - { label: Title, name: title, widget: string }
+      - { label: Title, name: title, widget: "string" }
       - {
           label: Description,
           name: description,
-          widget: string,
+          widget: "string",
           required: false,
         }
-      - { label: Body, name: body, widget: markdown }
+      - { label: Body, name: body, widget: "markdown" }
