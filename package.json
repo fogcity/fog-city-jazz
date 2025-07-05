@@ -15,6 +15,7 @@
     "@astrojs/rss": "^3.0.0",
     "@astrojs/sitemap": "^3.0.1",
     "@astrojs/tailwind": "^5.0.3",
+    "@astrojs/vercel": "^8.2.1",
     "astro": "^5.11.0",
     "astro-decap-cms-oauth": "^0.5.1",
     "daisyui": "^4.4.10",
