@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: your-user/fog-city-jazz
   branch: main
 media_folder: "public/uploads"
 public_folder: "/uploads"
