@@ -8,18 +8,17 @@ Decap CMS is pre-configured for editing the markdown pages in `src/content/pages
 To run the CMS locally use:
 
 ```bash
-npm run cms
+npx decap-server
 ```
 
-For production, deploy the `public/admin` folder along with the site. The CMS
-expects a Git Gateway backend, so ensure your hosting provider (for example,
-Netlify) has Identity and Git Gateway enabled. You will also need an OAuth
-application or personal access token with access to this repository.
+For production, deploy the `public/admin` folder along with the site. This
+configuration uses the GitHub backend, so create an OAuth application in GitHub
+and point it at your deployment. The CMS will redirect to GitHub for login and
+use the credentials below to authorize commits.
 
 ### Environment variables
 
-If you use the GitHub backend instead of Git Gateway, set the following
-variables in your deployment platform:
+Set the following variables in your deployment platform:
 
 - `GITHUB_CLIENT_ID`
 - `GITHUB_TOKEN`
