@@ -14,6 +14,7 @@ const {
   includeSidebar = true,
   sideBarActiveItemID,
   ogType,
+  useProse = true,
 } = Astro.props;
 ---
 
@@ -36,7 +37,13 @@ const {
         <Header title={SITE_TITLE} />
         <div class="md:flex md:justify-center">
           <main class="p-6 pt-10 lg:max-w-[900px] max-w-[100vw] w-full h-full">
-            <slot />
+            {useProse ? (
+              <article class="prose md:prose-lg dark:prose-invert max-w-none">
+                <slot />
+              </article>
+            ) : (
+              <slot />
+            )}
           </main>
         </div>
         <Footer />
