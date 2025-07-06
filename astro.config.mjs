@@ -1,4 +1,5 @@
 import mdx from "@astrojs/mdx"
+import remarkImageTextBlock from "./src/plugins/remark-image-text-block.js"
 import sitemap from "@astrojs/sitemap"
 import tailwind from "@astrojs/tailwind"
 import vercel from "@astrojs/vercel/serverless"
@@ -9,5 +10,10 @@ import { defineConfig } from "astro/config"
 export default defineConfig({
   output: "server",
   adapter: vercel(),
-  integrations: [mdx(), sitemap(), tailwind(), decapCmsOauth()],
+  integrations: [
+    mdx({ remarkPlugins: [remarkImageTextBlock] }),
+    sitemap(),
+    tailwind(),
+    decapCmsOauth(),
+  ],
 })
