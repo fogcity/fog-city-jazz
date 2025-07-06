@@ -16,4 +16,12 @@ export default defineConfig({
     tailwind(),
     decapCmsOauth(),
   ],
+  vite: {
+    resolve: {
+      alias: {
+        '@components': './src/components',
+        '@layouts': './src/layouts',
+      },
+    },
+  },
 })
