@@ -11,12 +11,15 @@ public_folder: "/media"
 
 editor:
   preview: false
+  editorComponents:
+    - ImageTextBlock
 
 collections:
   - name: pages
     label: Pages
     folder: "src/content/pages"
     extension: mdx
+    format: frontmatter
     delete: false
     show_preview_links: false
     fields:
