@@ -1,12 +1,12 @@
 ---
 const { sideBarActiveItemID } = Astro.props
-const activeClass = "bg-base-content/10"
+const activeClass = "bg-base-300"
 ---
 
 <ul class="menu grow shrink menu-md overflow-y-auto">
   <li>
     <a
-      class={`py-3 my-0.5 text-base ${sideBarActiveItemID === "home" ? activeClass : ""}`}
+      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:bg-base-content/10 ${sideBarActiveItemID === "home" ? activeClass : ""}`}
       id="home"
       href="/"
       >Home</a
@@ -14,7 +14,7 @@ const activeClass = "bg-base-content/10"
   </li>
   <li>
     <a
-      class={`py-3 my-0.5 text-base ${sideBarActiveItemID === "bio" ? activeClass : ""}`}
+      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:bg-base-content/10 ${sideBarActiveItemID === "bio" ? activeClass : ""}`}
       id="bio"
       href="/bio"
       >Bio</a
@@ -22,7 +22,7 @@ const activeClass = "bg-base-content/10"
   </li>
   <li>
     <a
-      class={`py-3 my-0.5 text-base ${sideBarActiveItemID === "lessons" ? activeClass : ""}`}
+      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:bg-base-content/10 ${sideBarActiveItemID === "lessons" ? activeClass : ""}`}
       id="lessons"
       href="/lessons"
       >Lessons</a
@@ -30,7 +30,7 @@ const activeClass = "bg-base-content/10"
   </li>
   <li>
     <a
-      class={`py-3 my-0.5 text-base ${sideBarActiveItemID === "music" ? activeClass : ""}`}
+      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:bg-base-content/10 ${sideBarActiveItemID === "music" ? activeClass : ""}`}
       id="music"
       href="/music"
       >Music</a
@@ -38,7 +38,7 @@ const activeClass = "bg-base-content/10"
   </li>
   <li>
     <a
-      class={`py-3 my-0.5 text-base ${sideBarActiveItemID === "contact" ? activeClass : ""}`}
+      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:bg-base-content/10 ${sideBarActiveItemID === "contact" ? activeClass : ""}`}
       id="contact"
       href="/contact"
       >Contact</a
