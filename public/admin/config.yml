@@ -28,4 +28,10 @@ collections:
           widget: "string",
           required: false,
         }
+      - {
+          label: Imports,
+          name: setup,
+          widget: hidden,
+          default: "import ImageTextBlock from '@components/ImageTextBlock.astro'",
+        }
       - { label: Body, name: body, widget: "markdown" }

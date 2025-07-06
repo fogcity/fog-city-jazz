@@ -5,7 +5,7 @@ CMS.registerEditorComponent({
   id: "image-text-block",
   label: "Image + Text",
   fields: [
-    { name: "src", label: "Image URL", widget: "string" },
+    { name: "src", label: "Image", widget: "image" },
     { name: "alt", label: "Image Alt", widget: "string" },
     { name: "content", label: "Text", widget: "markdown" },
   ],
