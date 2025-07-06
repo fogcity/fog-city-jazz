@@ -1,5 +1,4 @@
 import mdx from "@astrojs/mdx"
-import remarkImageTextBlock from "./src/plugins/remark-image-text-block.js"
 import sitemap from "@astrojs/sitemap"
 import tailwind from "@astrojs/tailwind"
 import vercel from "@astrojs/vercel/serverless"
@@ -11,7 +10,7 @@ export default defineConfig({
   output: "server",
   adapter: vercel(),
   integrations: [
-    mdx({ remarkPlugins: [remarkImageTextBlock] }),
+    mdx(),
     sitemap(),
     tailwind(),
     decapCmsOauth(),
