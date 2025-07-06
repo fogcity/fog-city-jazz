@@ -9,10 +9,15 @@ backend:
 media_folder: "public/uploads"
 public_folder: "/uploads"
 
+editor:
+  preview: false
+
 collections:
   - name: pages
     label: Pages
     folder: "src/content/pages"
+    delete: false
+    show_preview_links: false
     fields:
       - { label: Title, name: title, widget: "string" }
       - {
