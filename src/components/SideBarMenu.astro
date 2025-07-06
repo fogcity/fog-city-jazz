@@ -6,7 +6,7 @@ const selectedPageClass = "bg-base-content/10"
 <ul class="menu grow shrink menu-md overflow-y-auto">
   <li>
     <a
-      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:bg-base-content/10 ${sideBarActiveItemID === "home" ? selectedPageClass : ""}`}
+      class={`py-3 my-0.5 text-base hover:${selectedPageClass} active:${selectedPageClass} ${sideBarActiveItemID === "home" ? selectedPageClass : ""}`}
       id="home"
       href="/"
       >Home</a
@@ -14,7 +14,7 @@ const selectedPageClass = "bg-base-content/10"
   </li>
   <li>
     <a
-      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:bg-base-content/10 ${sideBarActiveItemID === "bio" ? selectedPageClass : ""}`}
+      class={`py-3 my-0.5 text-base hover:${selectedPageClass} active:${selectedPageClass} ${sideBarActiveItemID === "bio" ? selectedPageClass : ""}`}
       id="bio"
       href="/bio"
       >Bio</a
@@ -22,7 +22,7 @@ const selectedPageClass = "bg-base-content/10"
   </li>
   <li>
     <a
-      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:bg-base-content/10 ${sideBarActiveItemID === "lessons" ? selectedPageClass : ""}`}
+      class={`py-3 my-0.5 text-base hover:${selectedPageClass} active:${selectedPageClass} ${sideBarActiveItemID === "lessons" ? selectedPageClass : ""}`}
       id="lessons"
       href="/lessons"
       >Lessons</a
@@ -30,7 +30,7 @@ const selectedPageClass = "bg-base-content/10"
   </li>
   <li>
     <a
-      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:bg-base-content/10 ${sideBarActiveItemID === "music" ? selectedPageClass : ""}`}
+      class={`py-3 my-0.5 text-base hover:${selectedPageClass} active:${selectedPageClass} ${sideBarActiveItemID === "music" ? selectedPageClass : ""}`}
       id="music"
       href="/music"
       >Music</a
@@ -38,7 +38,7 @@ const selectedPageClass = "bg-base-content/10"
   </li>
   <li>
     <a
-      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:bg-base-content/10 ${sideBarActiveItemID === "contact" ? selectedPageClass : ""}`}
+      class={`py-3 my-0.5 text-base hover:${selectedPageClass} active:${selectedPageClass} ${sideBarActiveItemID === "contact" ? selectedPageClass : ""}`}
       id="contact"
       href="/contact"
       >Contact</a
