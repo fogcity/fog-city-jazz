@@ -1,12 +1,12 @@
 ---
 const { sideBarActiveItemID } = Astro.props
-const activeClass = "bg-base-300"
+const selectedPageClass = "bg-base-content/10"
 ---
 
 <ul class="menu grow shrink menu-md overflow-y-auto">
   <li>
     <a
-      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:${activeClass} ${sideBarActiveItemID === "home" ? activeClass : ""}`}
+      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:bg-base-content/10 ${sideBarActiveItemID === "home" ? selectedPageClass : ""}`}
       id="home"
       href="/"
       >Home</a
@@ -14,7 +14,7 @@ const activeClass = "bg-base-300"
   </li>
   <li>
     <a
-      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:${activeClass} ${sideBarActiveItemID === "bio" ? activeClass : ""}`}
+      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:bg-base-content/10 ${sideBarActiveItemID === "bio" ? selectedPageClass : ""}`}
       id="bio"
       href="/bio"
       >Bio</a
@@ -22,7 +22,7 @@ const activeClass = "bg-base-300"
   </li>
   <li>
     <a
-      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:${activeClass} ${sideBarActiveItemID === "lessons" ? activeClass : ""}`}
+      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:bg-base-content/10 ${sideBarActiveItemID === "lessons" ? selectedPageClass : ""}`}
       id="lessons"
       href="/lessons"
       >Lessons</a
@@ -30,7 +30,7 @@ const activeClass = "bg-base-300"
   </li>
   <li>
     <a
-      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:${activeClass} ${sideBarActiveItemID === "music" ? activeClass : ""}`}
+      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:bg-base-content/10 ${sideBarActiveItemID === "music" ? selectedPageClass : ""}`}
       id="music"
       href="/music"
       >Music</a
@@ -38,7 +38,7 @@ const activeClass = "bg-base-300"
   </li>
   <li>
     <a
-      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:${activeClass} ${sideBarActiveItemID === "contact" ? activeClass : ""}`}
+      class={`py-3 my-0.5 text-base hover:bg-base-content/10 active:bg-base-content/10 ${sideBarActiveItemID === "contact" ? selectedPageClass : ""}`}
       id="contact"
       href="/contact"
       >Contact</a
