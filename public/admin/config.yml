@@ -16,6 +16,7 @@ collections:
   - name: pages
     label: Pages
     folder: "src/content/pages"
+    extension: mdx
     delete: false
     show_preview_links: false
     fields:
