@@ -1,7 +1,8 @@
 window.CMS_MANUAL_INIT = true;
 
 CMS.registerEditorComponent({
-  id: "ImageTextBlock",
+  // id uses kebab-case per Decap docs
+  id: "image-text-block",
   label: "Image + Text",
   fields: [
     { name: "src", label: "Image URL", widget: "string" },

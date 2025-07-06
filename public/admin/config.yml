@@ -11,8 +11,6 @@ public_folder: "/media"
 
 editor:
   preview: false
-  editorComponents:
-    - ImageTextBlock
 
 collections:
   - name: pages
