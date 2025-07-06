@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro"
 import { getEntryBySlug } from "astro:content"
+import ImageTextBlock from "../components/ImageTextBlock.astro"
 
 const entry = await getEntryBySlug("pages", "contact")
 const { Content } = await entry.render()
@@ -11,5 +12,5 @@ const { Content } = await entry.render()
   description={entry.data.description}
   sideBarActiveItemID="contact"
 >
-  <Content />
+  <Content components={{ ImageTextBlock }} />
 </BaseLayout>
