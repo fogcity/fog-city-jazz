@@ -2,7 +2,7 @@
 title: Contact
 description: Get in touch with us
 ---
-Jeffrey Gaeto
 
+Jeffrey Gaeto
 
 fogcityjazz@gmail.com
