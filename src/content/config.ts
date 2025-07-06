@@ -3,7 +3,6 @@ import { z, defineCollection } from "astro:content"
 const pageSchema = z.object({
   title: z.string(),
   description: z.string().optional(),
-  setup: z.string().optional(),
 })
 
 export type PageSchema = z.infer<typeof pageSchema>
