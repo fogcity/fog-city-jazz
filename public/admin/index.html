@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>Fog City Jazz CMS</title>
-    <link href="admin/config.yml" type="text/yaml" rel="cms-config-url" />
+    <!-- Use absolute paths so Decap loads resources no matter how the admin
+         page is requested (e.g. /admin or /admin/). -->
+    <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
   </head>
   <body>
     <script>
@@ -16,6 +18,6 @@
       integrity="sha384-RjpoGRpUGg1p+ypJVafvVW4tqDM8iiKI8V9znLHZh8h/wjNflwvVrUENSW38fLCO"
       crossorigin="anonymous"
     ></script>
-    <script src="cms.js"></script>
+    <script src="/admin/cms.js"></script>
   </body>
 </html>
