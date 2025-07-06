@@ -6,8 +6,8 @@ backend:
   site_domain: fog-city-jazz.vercel.app
   auth_endpoint: oauth
 
-media_folder: "public/uploads"
-public_folder: "/uploads"
+media_folder: "public/media"
+public_folder: "/media"
 
 editor:
   preview: false
