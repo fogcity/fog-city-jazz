@@ -1,5 +1,3 @@
-window.CMS_MANUAL_INIT = true;
-
 CMS.registerEditorComponent({
   // id uses kebab-case per Decap docs
   id: "image-text-block",
@@ -10,7 +8,7 @@ CMS.registerEditorComponent({
     { name: "content", label: "Text", widget: "markdown" },
   ],
   pattern:
-    /<ImageTextBlock\s+src="([^"]+)"\s+alt="([^"]*)">([\s\S]*?)<\/ImageTextBlock>/ms,
+    /^<ImageTextBlock[^>]*src="([^"]+)"[^>]*alt="([^"]*)"[^>]*>([\s\S]*?)<\/ImageTextBlock>$/ms,
   fromBlock: function (match) {
     return {
       src: match[1],
