@@ -9,7 +9,8 @@ CMS.registerEditorComponent({
     { name: "alt", label: "Image Alt", widget: "string" },
     { name: "content", label: "Text", widget: "markdown" },
   ],
-  pattern: /^<ImageTextBlock\s+src="([^"]+)"\s+alt="([^"]*)">([\s\S]*?)<\/ImageTextBlock>$/ms,
+  pattern:
+    /<ImageTextBlock\s+src="([^"]+)"\s+alt="([^"]*)">([\s\S]*?)<\/ImageTextBlock>/ms,
   fromBlock: function (match) {
     return {
       src: match[1],
