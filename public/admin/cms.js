@@ -9,7 +9,7 @@ CMS.registerEditorComponent({
     { name: "alt", label: "Image Alt", widget: "string" },
     { name: "content", label: "Text", widget: "markdown" },
   ],
-  pattern: /<ImageTextBlock\s+src="([^"]+)"\s+alt="([^"]+)">([\s\S]*?)<\/ImageTextBlock>/m,
+  pattern: /^<ImageTextBlock\s+src="([^"]+)"\s+alt="([^"]*)">([\s\S]*?)<\/ImageTextBlock>$/ms,
   fromBlock: function (match) {
     return {
       src: match[1],
@@ -21,7 +21,7 @@ CMS.registerEditorComponent({
     return `<ImageTextBlock src="${obj.src}" alt="${obj.alt}">\n${obj.content}\n</ImageTextBlock>`;
   },
   toPreview: function (obj) {
-    return `<div class="flex flex-col md:flex-row items-center gap-4"><img src="${obj.src}" alt="${obj.alt}" style="width:48%;"/><div style="width:48%;">${obj.content}</div></div>`;
+    return `\n<div class="flex flex-col md:flex-row items-center gap-4">\n  <img src="${obj.src}" alt="${obj.alt}" style="width:48%" />\n  <div style="width:48%">${obj.content}</div>\n</div>`;
   },
 });
 
