@@ -1,0 +1,9 @@
+---
+const { title, description, iframe } = Astro.props
+---
+
+<div class="soundcloud-embed my-6 w-full">
+  {title && <h3 class="mb-2">{title}</h3>}
+  {description && <p class="mb-4">{description}</p>}
+  <div class="w-full" set:html={iframe} />
+</div>
