@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro"
 import { getEntryBySlug } from "astro:content"
 import ImageTextBlock from "../components/ImageTextBlock.astro"
+import SoundcloudEmbed from "../components/SoundcloudEmbed.astro"
 
 const entry = await getEntryBySlug("pages", "music")
 const { Content } = await entry.render()
@@ -12,5 +13,5 @@ const { Content } = await entry.render()
   description={entry.data.description}
   sideBarActiveItemID="music"
 >
-  <Content components={{ ImageTextBlock }} />
+  <Content components={{ ImageTextBlock, SoundcloudEmbed }} />
 </BaseLayout>

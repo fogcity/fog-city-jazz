@@ -19,15 +19,50 @@ CMS.registerEditorComponent({
       src: match[1],
       alt: match[2] || "",
       content: match[3].trim(),
-    };
+    }
   },
   toBlock: function (obj) {
-    const alt = obj.alt && obj.alt.trim() ? obj.alt : "image";
-    return `<ImageTextBlock src="${obj.src}" alt="${alt}">\n${obj.content}\n</ImageTextBlock>`;
+    const alt = obj.alt && obj.alt.trim() ? obj.alt : "image"
+    return `<ImageTextBlock src="${obj.src}" alt="${alt}">\n${obj.content}\n</ImageTextBlock>`
   },
   toPreview: function (obj) {
-    return `\n<div class="flex flex-col md:flex-row items-center gap-4">\n  <img src="${obj.src}" alt="${obj.alt}" style="width:48%" />\n  <div style="width:48%">${obj.content}</div>\n</div>`;
+    return `\n<div class="flex flex-col md:flex-row items-center gap-4">\n  <img src="${obj.src}" alt="${obj.alt}" style="width:48%" />\n  <div style="width:48%">${obj.content}</div>\n</div>`
   },
-});
+})
 
-CMS.init();
+CMS.registerEditorComponent({
+  id: "soundcloud-embed",
+  label: "SoundCloud",
+  fields: [
+    { name: "iframe", label: "Iframe", widget: "text" },
+    { name: "title", label: "Title", widget: "string" },
+    {
+      name: "description",
+      label: "Description",
+      widget: "string",
+      required: false,
+    },
+  ],
+  pattern:
+    /^<SoundcloudEmbed[^>]*iframe='([^']+)'[^>]*title="([^"]+)"(?:[^>]*description="([^"]*)")?\s*\/>$/ms,
+  fromBlock: function (match) {
+    return {
+      iframe: match[1],
+      title: match[2],
+      description: match[3] || "",
+    }
+  },
+  toBlock: function (obj) {
+    const desc =
+      obj.description && obj.description.trim()
+        ? ` description="${obj.description}"`
+        : ""
+    return `<SoundcloudEmbed iframe='${obj.iframe}' title="${obj.title}"${desc} />`
+  },
+  toPreview: function (obj) {
+    const desc = obj.description ? `<p>${obj.description}</p>` : ""
+    return `<div><strong>${obj.title}</strong>${desc}${obj.iframe}</div>`
+  },
+})
+
+CMS.init()
