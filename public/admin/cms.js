@@ -10,23 +10,60 @@ CMS.registerEditorComponent({
       widget: "string",
       required: false,
     },
+    {
+      name: "imageWidth",
+      label: "Image Width (%)",
+      widget: "number",
+      default: 50,
+    },
+    {
+      name: "imageOnLeft",
+      label: "Image on Left",
+      widget: "boolean",
+      default: true,
+    },
+    {
+      name: "topAlign",
+      label: "Top Align Text",
+      widget: "boolean",
+      default: false,
+    },
     { name: "content", label: "Text", widget: "markdown" },
   ],
-  pattern:
-    /^<ImageTextBlock[^>]*src="([^"]+)"(?:[^>]*alt="([^"]*)")?[^>]*>([\s\S]*?)<\/ImageTextBlock>$/ms,
+  pattern: /^<ImageTextBlock([^>]*)>([\s\S]*?)<\/ImageTextBlock>$/ms,
   fromBlock: function (match) {
+    const attrs = match[1];
+    const get = (regex, d) => {
+      const m = attrs.match(regex);
+      return m ? m[1] : d;
+    };
+    const src = get(/src="([^"]+)"/, "");
+    const alt = get(/alt="([^"]*)"/, "");
+    const imageWidth = parseInt(get(/imageWidth=["{]?([^"}]+)["}]?/, "50"), 10);
+    const imageOnLeft = get(/imageOnLeft=["{]?([^"}]+)["}]?/, "true") === "true";
+    const topAlign = get(/topAlign=["{]?([^"}]+)["}]?/, "false") === "true";
     return {
-      src: match[1],
-      alt: match[2] || "",
-      content: match[3].trim(),
+      src,
+      alt,
+      imageWidth,
+      imageOnLeft,
+      topAlign,
+      content: match[2].trim(),
     };
   },
   toBlock: function (obj) {
     const alt = obj.alt && obj.alt.trim() ? obj.alt : "image";
-    return `<ImageTextBlock src="${obj.src}" alt="${alt}">\n${obj.content}\n</ImageTextBlock>`;
+    const width = obj.imageWidth ?? 50;
+    const left = obj.imageOnLeft ?? true;
+    const top = obj.topAlign ?? false;
+    return `<ImageTextBlock src="${obj.src}" alt="${alt}" imageWidth={${width}} imageOnLeft={${left}} topAlign={${top}}>\n${obj.content}\n</ImageTextBlock>`;
   },
   toPreview: function (obj) {
-    return `\n<div class="flex flex-col md:flex-row items-center gap-4">\n  <img src="${obj.src}" alt="${obj.alt}" style="width:48%" />\n  <div style="width:48%">${obj.content}</div>\n</div>`;
+    const width = obj.imageWidth ?? 50;
+    const textWidth = 100 - width;
+    const row = obj.imageOnLeft ? "" : "md:flex-row-reverse";
+    const align = obj.topAlign ? "items-start" : "items-center";
+    return `\n<div class="flex flex-col md:flex-row gap-4 w-full ${align} ${row}">\n  <img src="${obj.src}" alt="${obj.alt}" style="width:${width}%" />\n  <div style="width:${textWidth}%">${obj.content}</div>\n</div>`;
   },
 });
 
