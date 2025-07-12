@@ -32,16 +32,16 @@ CMS.registerEditorComponent({
   ],
   pattern: /^<ImageTextBlock([^>]*)>([\s\S]*?)<\/ImageTextBlock>$/ms,
   fromBlock: function (match) {
-    const attrs = match[1];
+    const attrs = match[1]
     const get = (regex, d) => {
-      const m = attrs.match(regex);
-      return m ? m[1] : d;
-    };
-    const src = get(/src="([^"]+)"/, "");
-    const alt = get(/alt="([^"]*)"/, "");
-    const imageWidth = parseInt(get(/imageWidth=["{]?([^"}]+)["}]?/, "50"), 10);
-    const imageOnLeft = get(/imageOnLeft=["{]?([^"}]+)["}]?/, "true") === "true";
-    const topAlign = get(/topAlign=["{]?([^"}]+)["}]?/, "false") === "true";
+      const m = attrs.match(regex)
+      return m ? m[1] : d
+    }
+    const src = get(/src="([^"]+)"/, "")
+    const alt = get(/alt="([^"]*)"/, "")
+    const imageWidth = parseInt(get(/imageWidth=["{]?([^"}]+)["}]?/, "50"), 10)
+    const imageOnLeft = get(/imageOnLeft=["{]?([^"}]+)["}]?/, "true") === "true"
+    const topAlign = get(/topAlign=["{]?([^"}]+)["}]?/, "false") === "true"
     return {
       src,
       alt,
@@ -49,22 +49,64 @@ CMS.registerEditorComponent({
       imageOnLeft,
       topAlign,
       content: match[2].trim(),
-    };
+    }
   },
   toBlock: function (obj) {
-    const alt = obj.alt && obj.alt.trim() ? obj.alt : "image";
-    const width = obj.imageWidth ?? 50;
-    const left = obj.imageOnLeft ?? true;
-    const top = obj.topAlign ?? false;
-    return `<ImageTextBlock src="${obj.src}" alt="${alt}" imageWidth={${width}} imageOnLeft={${left}} topAlign={${top}}>\n${obj.content}\n</ImageTextBlock>`;
+    const alt = obj.alt && obj.alt.trim() ? obj.alt : "image"
+    const width = obj.imageWidth ?? 50
+    const left = obj.imageOnLeft ?? true
+    const top = obj.topAlign ?? false
+    return `<ImageTextBlock src="${obj.src}" alt="${alt}" imageWidth={${width}} imageOnLeft={${left}} topAlign={${top}}>\n${obj.content}\n</ImageTextBlock>`
   },
   toPreview: function (obj) {
-    const width = obj.imageWidth ?? 50;
-    const textWidth = 100 - width;
-    const row = obj.imageOnLeft ? "" : "md:flex-row-reverse";
-    const align = obj.topAlign ? "items-start" : "items-center";
-    return `\n<div class="flex flex-col md:flex-row gap-4 w-full ${align} ${row}">\n  <img src="${obj.src}" alt="${obj.alt}" style="width:${width}%" />\n  <div style="width:${textWidth}%">${obj.content}</div>\n</div>`;
+    const width = obj.imageWidth ?? 50
+    const textWidth = 100 - width
+    const row = obj.imageOnLeft ? "" : "md:flex-row-reverse"
+    const align = obj.topAlign ? "items-start" : "items-center"
+    return `\n<div class="flex flex-col md:flex-row gap-4 w-full ${align} ${row}">\n  <img src="${obj.src}" alt="${obj.alt}" style="width:${width}%" />\n  <div style="width:${textWidth}%">${obj.content}</div>\n</div>`
   },
-});
+})
 
-CMS.init();
+CMS.registerEditorComponent({
+  id: "soundcloud-embed",
+  label: "SoundCloud",
+  fields: [
+    { name: "title", label: "Title", widget: "string", required: false },
+    {
+      name: "description",
+      label: "Description",
+      widget: "string",
+      required: false,
+    },
+    { name: "iframe", label: "Embed Code", widget: "text" },
+  ],
+  pattern: /^<SoundCloudEmbed([^>]*)\/>$/ms,
+  fromBlock: function (match) {
+    const attrs = match[1]
+    const get = (regex, d) => {
+      const m = attrs.match(regex)
+      return m ? m[1] : d
+    }
+    const title = get(/title="([^"]*)"/, "")
+    const description = get(/description="([^"]*)"/, "")
+    const iframe = get(/iframe={[`']([\s\S]*?)[`']}/, "")
+    return {
+      title,
+      description,
+      iframe,
+    }
+  },
+  toBlock: function (obj) {
+    const title = obj.title ?? ""
+    const description = obj.description ?? ""
+    const iframe = obj.iframe ?? ""
+    return `<SoundCloudEmbed title="${title}" description="${description}" iframe={\`${iframe}\`} />`
+  },
+  toPreview: function (obj) {
+    const title = obj.title ? `<strong>${obj.title}</strong>` : ""
+    const description = obj.description ? `<p>${obj.description}</p>` : ""
+    return `${title}${description}${obj.iframe}`
+  },
+})
+
+CMS.init()
