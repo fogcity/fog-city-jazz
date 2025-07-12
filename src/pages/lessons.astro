@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro"
 import { getEntryBySlug } from "astro:content"
-import ImageTextBlock from "../components/ImageTextBlock.astro"
+import mdxComponents from "../components/mdx-components"
 
 const entry = await getEntryBySlug("pages", "lessons")
 const { Content } = await entry.render()
@@ -12,5 +12,5 @@ const { Content } = await entry.render()
   description={entry.data.description}
   sideBarActiveItemID="lessons"
 >
-  <Content components={{ ImageTextBlock }} />
+  <Content components={mdxComponents} />
 </BaseLayout>
