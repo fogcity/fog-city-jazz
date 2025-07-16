@@ -8,8 +8,8 @@ const { Content } = await entry.render()
 ---
 
 <BaseLayout
-  title={entry.data.title}
-  description={entry.data.description}
+  {...entry.data}
+  frontmatter={entry.data}
   sideBarActiveItemID="music"
 >
   <Content components={mdxComponents} />

@@ -1,0 +1,59 @@
+---
+// no props — pull from frontmatter
+const { image, video, title, subtitle, cta } = Astro.props.frontmatter.hero
+---
+
+<div
+  class="relative overflow-hidden rounded-xl h-[60vh] sm:h-[70vh] lg:h-[80vh]"
+>
+  {
+    video ? (
+      <video
+        src={video}
+        poster={image}
+        autoplay
+        muted
+        loop
+        playsinline
+        aria-hidden="true"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+    ) : (
+      <img
+        src={image}
+        alt=""
+        loading="lazy"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+    )
+  }
+
+  <div
+    class="relative z-10 w-full h-full bg-gradient-to-b from-transparent to-black/40 p-4 sm:p-6 lg:p-8 flex flex-col justify-between"
+  >
+    <!-- Top-left text -->
+    <div class="max-w-lg">
+      <h1
+        class="font-display text-3xl sm:text-5xl lg:text-6xl text-white drop-shadow-md"
+      >
+        {title}
+      </h1>
+      <p class="mt-2 text-lg sm:text-xl text-white/90 drop-shadow-sm">
+        {subtitle}
+      </p>
+    </div>
+
+    <!-- Bottom-right CTA -->
+    <div class="self-end">
+      <a
+        href={cta.href}
+        class={`inline-block py-3 px-6 rounded-lg font-medium transition ` +
+          (cta.primary
+            ? `bg-gold text-black hover:bg-gold-dark`
+            : `border border-gold text-white hover:bg-gold/20`)}
+      >
+        {cta.text}
+      </a>
+    </div>
+  </div>
+</div>
