@@ -7,10 +7,6 @@ const entry = await getEntryBySlug("pages", "bio")
 const { Content } = await entry.render()
 ---
 
-<BaseLayout
-  title={entry.data.title}
-  description={entry.data.description}
-  sideBarActiveItemID="bio"
->
+<BaseLayout {...entry.data} frontmatter={entry.data} sideBarActiveItemID="bio">
   <Content components={mdxComponents} />
 </BaseLayout>
