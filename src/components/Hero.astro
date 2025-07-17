@@ -47,10 +47,7 @@ const { image, video, title, subtitle, cta } = Astro.props.frontmatter.hero
     <div class="self-end">
       <a
         href={cta.href}
-        class={`inline-block py-3 px-6 rounded-lg font-medium transition ` +
-          (cta.primary
-            ? `bg-gold text-black hover:bg-gold-dark`
-            : `border border-gold text-white hover:bg-gold/20`)}
+        class="inline-block py-3 px-6 rounded-lg font-medium bg-white text-black shadow-md transition transform hover:shadow-xl hover:scale-105"
       >
         {cta.text}
       </a>
