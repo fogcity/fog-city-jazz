@@ -20,17 +20,29 @@ collections:
     format: frontmatter
     delete: false
     show_preview_links: false
-    fields:
-      - { label: Title, name: title, widget: "string" }
-      - {
-          label: Description,
-          name: description,
-          widget: "string",
-          required: false,
-        }
-      - label: Body
-        name: body
-        widget: markdown
-        editor_components:
-          - image-text-block
+      fields:
+        - { label: Title, name: title, widget: "string" }
+        - { label: Hero Title, name: heroTitle, widget: "string" }
+        - {
+            label: Description,
+            name: description,
+            widget: "string",
+            required: false,
+          }
+        - label: Hero Media
+          name: hero
+          widget: object
+          fields:
+            - label: Background Image
+              name: image
+              widget: image
+              required: true
+            - { label: Background Video (optional), name: video, widget: string, required: false }
+        - { label: CTA Text, name: ctaText, widget: "string", required: false }
+        - { label: CTA Link, name: ctaLink, widget: "string", required: false }
+        - label: Body
+          name: body
+          widget: markdown
+          editor_components:
+            - image-text-block
           - soundcloud-embed
