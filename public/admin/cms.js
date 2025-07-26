@@ -80,7 +80,9 @@ CMS.registerEditorComponent({
     },
     { name: "iframe", label: "Embed Code", widget: "text" },
   ],
-  pattern: /^<SoundCloudEmbed([^>]*)\/>$/ms,
+  // Allow any characters (including ">" from the iframe HTML) in the attribute
+  // string so the component is correctly detected by Decap.
+  pattern: /^<SoundCloudEmbed([\s\S]*?)\/>$/ms,
   fromBlock: function (match) {
     const attrs = match[1]
     const get = (regex, d) => {
