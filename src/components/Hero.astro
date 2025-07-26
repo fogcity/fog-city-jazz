@@ -1,6 +1,13 @@
 ---
-// no props — pull from frontmatter
-const { image, video, title, subtitle, cta } = Astro.props.frontmatter.hero
+// pull hero data from frontmatter with backwards compatibility for old fields
+const frontmatter = Astro.props.frontmatter
+const hero = frontmatter.hero ?? {}
+const { image, video } = hero
+
+const title = frontmatter.heroTitle ?? hero.title
+const subtitle = frontmatter.description ?? hero.subtitle
+const ctaText = frontmatter.ctaText ?? hero?.cta?.text
+const ctaLink = frontmatter.ctaLink ?? hero?.cta?.href
 ---
 
 <div
@@ -46,10 +53,10 @@ const { image, video, title, subtitle, cta } = Astro.props.frontmatter.hero
     <!-- Bottom-right CTA -->
     <div class="self-end">
       <a
-        href={cta.href}
+        href={ctaLink}
         class="inline-block py-3 px-6 rounded-lg font-medium bg-white text-black shadow-md transition transform hover:shadow-xl hover:scale-105"
       >
-        {cta.text}
+        {ctaText}
       </a>
     </div>
   </div>

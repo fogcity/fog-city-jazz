@@ -5,9 +5,14 @@ export default defineDecapConfig({
       path: "src/content/pages",
       frontmatter: {
         schema: {
+          title: { type: "string", label: "Title", required: true },
+          heroTitle: { type: "string", label: "Hero Title", required: true },
+          description: { type: "string", label: "Description" },
+          ctaText: { type: "string", label: "CTA Text" },
+          ctaLink: { type: "string", label: "CTA Link" },
           hero: {
             type: "object",
-            label: "Hero Section",
+            label: "Hero Media",
             fields: {
               image: {
                 type: "image",
@@ -15,25 +20,6 @@ export default defineDecapConfig({
                 required: true,
               },
               video: { type: "string", label: "Background Video (optional)" },
-              title: { type: "string", label: "Title", required: true },
-              subtitle: { type: "string", label: "Subtitle", required: true },
-              cta: {
-                type: "object",
-                label: "CTA Button",
-                fields: {
-                  text: {
-                    type: "string",
-                    label: "Button Text",
-                    required: true,
-                  },
-                  href: { type: "string", label: "Link HREF", required: true },
-                  primary: {
-                    type: "boolean",
-                    label: "Solid Button?",
-                    default: true,
-                  },
-                },
-              },
             },
           },
         },
