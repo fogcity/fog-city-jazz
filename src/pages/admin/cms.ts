@@ -1,6 +1,5 @@
-// currently unused
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// Register custom Decap CMS editor components
 export default function setupCMS(CMS: any) {
   CMS.registerEditorComponent({
     // id uses kebab-case per Decap docs
