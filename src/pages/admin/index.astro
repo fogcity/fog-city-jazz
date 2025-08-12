@@ -16,12 +16,22 @@
     <script type="module">
       import setupCMS from './cms';
       
-      // Wait for the CMS script to load
+      // Wait for the CMS script to load and then initialize
       function waitForCMS() {
         if (window.CMS) {
           console.log('CMS loaded:', window.CMS);
-          setupCMS(window.CMS);
-          window.CMS.init();
+          
+          try {
+            // Register custom components first
+            setupCMS(window.CMS);
+            console.log('Custom components registered');
+            
+            // Then initialize the CMS
+            window.CMS.init();
+            console.log('CMS initialized');
+          } catch (error) {
+            console.error('Error setting up CMS:', error);
+          }
         } else {
           // Check again in a short moment
           setTimeout(waitForCMS, 100);

@@ -37,10 +37,9 @@ export default function setupCMS(CMS: any) {
       }
       const src = get(/src="([^"]+)"/, "")
       const alt = get(/alt="([^"]*)"/, "")
-      const imageWidth = parseInt(get(/imageWidth=["{]?([^"]+)["}]?/, "50"), 10)
-      const imageOnLeft =
-        get(/imageOnLeft=["{]?([^"]+)["}]?/, "true") === "true"
-      const topAlign = get(/topAlign=["{]?([^"]+)["}]?/, "false") === "true"
+      const imageWidth = parseInt(get(/imageWidth="([^"]+)"/, "50"), 10)
+      const imageOnLeft = get(/imageOnLeft="([^"]+)"/, "true") === "true"
+      const topAlign = get(/topAlign="([^"]+)"/, "false") === "true"
       return {
         src,
         alt,
@@ -55,7 +54,7 @@ export default function setupCMS(CMS: any) {
       const width = obj.imageWidth ?? 50
       const left = obj.imageOnLeft ?? true
       const top = obj.topAlign ?? false
-      return `<ImageTextBlock src="${obj.src}" alt="${alt}" imageWidth={${width}} imageOnLeft={${left}} topAlign={${top}}>\n${obj.content}\n</ImageTextBlock>`
+      return `<ImageTextBlock src="${obj.src}" alt="${alt}" imageWidth="${width}" imageOnLeft="${left}" topAlign="${top}">\n${obj.content}\n</ImageTextBlock>`
     },
     toPreview: function (obj: any) {
       const width = obj.imageWidth ?? 50
@@ -90,7 +89,7 @@ export default function setupCMS(CMS: any) {
       }
       const title = get(/title="([^"]*)"/, "")
       const description = get(/description="([^"]*)"/, "")
-      const iframe = get(/iframe={[`']([\s\S]*?)[`']}/, "")
+      const iframe = get(/iframe="([^"]*)"/, "")
       return {
         title,
         description,
@@ -101,7 +100,7 @@ export default function setupCMS(CMS: any) {
       const title = obj.title ?? ""
       const description = obj.description ?? ""
       const iframe = obj.iframe ?? ""
-      return `<SoundCloudEmbed title="${title}" description="${description}" iframe={\`${iframe}\`} />`
+      return `<SoundCloudEmbed title="${title}" description="${description}" iframe="${iframe}" />`
     },
     toPreview: function (obj: any) {
       const title = obj.title ? `<strong>${obj.title}</strong>` : ""
