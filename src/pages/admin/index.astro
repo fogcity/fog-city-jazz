@@ -1,3 +1,5 @@
+---
+---
 <!doctype html>
 <html>
   <head>
@@ -5,17 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>Fog City Jazz CMS</title>
-    <!-- Use absolute paths so Decap loads resources no matter how the admin
-         page is requested (e.g. /admin or /admin/). -->
     <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
     <link rel="icon" href="/favicon.svg" />
   </head>
   <body>
     <script type="module">
-      window.CMS_MANUAL_INIT = true;
-      import CMS from "https://unpkg.com/decap-cms@3.0.4/dist/decap-cms.js?module";
-      window.CMS = CMS;
-      import "/admin/cms.js";
+      import CMS from 'decap-cms-app';
+      import setupCMS from './cms';
+      setupCMS(CMS);
+      CMS.init();
     </script>
   </body>
 </html>
