@@ -1,12 +1,12 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro"
-import { getEntryBySlug } from "astro:content"
+import { getEntry } from 'astro:content'
 import mdxComponents from "../components/mdx-components"
+import BaseLayout from "../layouts/BaseLayout.astro"
 
-const entry = await getEntryBySlug("pages", "home")
-const { Content } = await entry.render()
+const entry = await getEntry("pages", "home")
+const rendered = await entry?.render()
 ---
 
-<BaseLayout {...entry.data} frontmatter={entry.data} sideBarActiveItemID="home">
-  <Content components={mdxComponents} />
+<BaseLayout {...entry?.data} frontmatter={entry?.data} sideBarActiveItemID="home">
+  {rendered && <rendered.Content components={mdxComponents} />}
 </BaseLayout>
