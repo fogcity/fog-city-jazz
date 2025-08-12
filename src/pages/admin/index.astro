@@ -15,11 +15,21 @@
   <body>
     <script type="module">
       import setupCMS from './cms';
-      // @ts-expect-error - CMS is loaded globally from the CDN script
-      const CMS = window.CMS;
-      console.log(CMS);
-      setupCMS(CMS);
-      CMS.init();
+      
+      // Wait for the CMS script to load
+      function waitForCMS() {
+        if (window.CMS) {
+          console.log('CMS loaded:', window.CMS);
+          setupCMS(window.CMS);
+          window.CMS.init();
+        } else {
+          // Check again in a short moment
+          setTimeout(waitForCMS, 100);
+        }
+      }
+      
+      // Start waiting for CMS to load
+      waitForCMS();
     </script>
   </body>
 </html>
