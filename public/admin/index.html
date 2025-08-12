@@ -8,16 +8,14 @@
     <!-- Use absolute paths so Decap loads resources no matter how the admin
          page is requested (e.g. /admin or /admin/). -->
     <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
+    <link rel="icon" href="/favicon.svg" />
   </head>
   <body>
-    <script>
+    <script type="module">
       window.CMS_MANUAL_INIT = true;
+      import CMS from "https://unpkg.com/decap-cms@3.0.4/dist/decap-cms.js";
+      window.CMS = CMS;
+      import "/admin/cms.js";
     </script>
-    <script
-      src="https://unpkg.com/decap-cms@3.0.4/dist/decap-cms.js"
-      integrity="sha384-RjpoGRpUGg1p+ypJVafvVW4tqDM8iiKI8V9znLHZh8h/wjNflwvVrUENSW38fLCO"
-      crossorigin="anonymous"
-    ></script>
-    <script src="/admin/cms.js"></script>
   </body>
 </html>
