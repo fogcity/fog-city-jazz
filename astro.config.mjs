@@ -13,7 +13,9 @@ export default defineConfig({
     mdx(),
     sitemap(),
     tailwind(),
-    decapCmsOauth(),
+    decapCmsOauth({
+      adminDisabled: true,
+    }),
   ],
   vite: {
     resolve: {
