@@ -17,6 +17,7 @@
       import setupCMS from './cms';
       // @ts-expect-error - CMS is loaded globally from the CDN script
       const CMS = window.CMS;
+      console.log(CMS);
       setupCMS(CMS);
       CMS.init();
     </script>
