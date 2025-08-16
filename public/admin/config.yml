@@ -8,6 +8,7 @@ backend:
 
 media_folder: "public/media"
 public_folder: "/media"
+local_backend: true
 
 editor:
   preview: false
@@ -43,5 +44,6 @@ collections:
         name: body
         widget: markdown
         editor_components:
+          - image
           - image-text-block
           - soundcloud-embed

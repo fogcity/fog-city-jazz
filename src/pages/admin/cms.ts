@@ -1,8 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // Register custom Decap CMS editor components
 export default function setupCMS(CMS: any) {
+  const getAttr = (attrs: string, name: string, fallback: string) => {
+    const re = new RegExp(`${name}=(?:"([^"]*)"|{([^}]*)})`)
+    const m = attrs.match(re)
+    if (!m) return fallback
+    return (m[1] ?? m[2] ?? fallback).trim()
+  }
+
+  // ---------- ImageTextBlock ----------
   CMS.registerEditorComponent({
-    // id uses kebab-case per Decap docs
     id: "image-text-block",
     label: "Image + Text",
     fields: [
@@ -28,43 +35,51 @@ export default function setupCMS(CMS: any) {
       },
       { name: "content", label: "Text", widget: "markdown" },
     ],
-    pattern: /^<ImageTextBlock([^>]*)>([\s\S]*?)<\/ImageTextBlock>$/ms,
-    fromBlock: function (match) {
+    pattern: /<ImageTextBlock([\s\S]*?)>([\s\S]*?)<\/ImageTextBlock>/,
+    fromBlock(match) {
       const attrs = match[1]
-      const get = (regex: RegExp, d: string) => {
-        const m = attrs.match(regex)
-        return m ? m[1] : d
-      }
-      const src = get(/src="([^"]+)"/, "")
-      const alt = get(/alt="([^"]*)"/, "")
-      const imageWidth = parseInt(get(/imageWidth="([^"]+)"/, "50"), 10)
-      const imageOnLeft = get(/imageOnLeft="([^"]+)"/, "true") === "true"
-      const topAlign = get(/topAlign="([^"]+)"/, "false") === "true"
+
+      const src = getAttr(attrs, "src", "")
+      const alt = getAttr(attrs, "alt", "")
+
+      const imageWidthRaw = getAttr(attrs, "imageWidth", "50")
+      const imageWidth = parseInt(imageWidthRaw, 10)
+
+      const imageOnLeftRaw = getAttr(attrs, "imageOnLeft", "true").toLowerCase()
+      const topAlignRaw = getAttr(attrs, "topAlign", "false").toLowerCase()
+
       return {
         src,
         alt,
-        imageWidth,
-        imageOnLeft,
-        topAlign,
+        imageWidth: Number.isFinite(imageWidth) ? imageWidth : 50,
+        imageOnLeft: imageOnLeftRaw === "true" || imageOnLeftRaw === "1",
+        topAlign: topAlignRaw === "true" || topAlignRaw === "1",
         content: match[2].trim(),
       }
     },
-    toBlock: function (obj: any) {
+    toBlock(obj: any) {
       const alt = obj.alt && obj.alt.trim() ? obj.alt : "image"
       const width = obj.imageWidth ?? 50
       const left = obj.imageOnLeft ?? true
       const top = obj.topAlign ?? false
-      return `<ImageTextBlock src="${obj.src}" alt="${alt}" imageWidth="${width}" imageOnLeft="${left}" topAlign="${top}">\n${obj.content}\n</ImageTextBlock>`
+      return `<ImageTextBlock src="${obj.src}" alt="${alt}" imageWidth="${width}" imageOnLeft="${left}" topAlign="${top}">
+${obj.content}
+</ImageTextBlock>`
     },
-    toPreview: function (obj: any) {
+    toPreview(obj: any) {
       const width = obj.imageWidth ?? 50
       const textWidth = 100 - width
       const row = obj.imageOnLeft ? "" : "md:flex-row-reverse"
       const align = obj.topAlign ? "items-start" : "items-center"
-      return `\n<div class="flex flex-col md:flex-row gap-4 w-full ${align} ${row}">\n  <img src="${obj.src}" alt="${obj.alt}" style="width:${width}%" />\n  <div style="width:${textWidth}%">${obj.content}</div>\n</div>`
+      return `
+<div class="flex flex-col md:flex-row gap-4 w-full ${align} ${row}">
+  <img src="${obj.src}" alt="${obj.alt ?? ""}" style="width:${width}%" />
+  <div style="width:${textWidth}%">${obj.content ?? ""}</div>
+</div>`
     },
   })
 
+  // ---------- SoundCloudEmbed ----------
   CMS.registerEditorComponent({
     id: "soundcloud-embed",
     label: "SoundCloud",
@@ -78,34 +93,24 @@ export default function setupCMS(CMS: any) {
       },
       { name: "iframe", label: "Embed Code", widget: "text" },
     ],
-    // Allow any characters (including ">" from the iframe HTML) in the attribute
-    // string so the component is correctly detected by Decap.
-    pattern: /^<SoundCloudEmbed([\s\S]*?)\/>$/ms,
-    fromBlock: function (match) {
+    pattern: /<SoundCloudEmbed([\s\S]*?)\/>/,
+    fromBlock(match) {
       const attrs = match[1]
-      const get = (regex: RegExp, d: string) => {
-        const m = attrs.match(regex)
-        return m ? m[1] : d
-      }
-      const title = get(/title="([^"]*)"/, "")
-      const description = get(/description="([^"]*)"/, "")
-      const iframe = get(/iframe="([^"]*)"/, "")
-      return {
-        title,
-        description,
-        iframe,
-      }
+      const title = getAttr(attrs, "title", "")
+      const description = getAttr(attrs, "description", "")
+      const iframe = getAttr(attrs, "iframe", "")
+      return { title, description, iframe }
     },
-    toBlock: function (obj: any) {
+    toBlock(obj: any) {
       const title = obj.title ?? ""
       const description = obj.description ?? ""
       const iframe = obj.iframe ?? ""
       return `<SoundCloudEmbed title="${title}" description="${description}" iframe="${iframe}" />`
     },
-    toPreview: function (obj: any) {
+    toPreview(obj: any) {
       const title = obj.title ? `<strong>${obj.title}</strong>` : ""
       const description = obj.description ? `<p>${obj.description}</p>` : ""
-      return `${title}${description}${obj.iframe}`
+      return `${title}${description}${obj.iframe ?? ""}`
     },
   })
 }

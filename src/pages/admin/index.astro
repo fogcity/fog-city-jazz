@@ -1,45 +1,21 @@
----
----
-
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
-    <title>Fog City Jazz CMS</title>
+    <title>CMS</title>
     <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
-    <link rel="icon" href="/favicon.svg" />
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   </head>
   <body>
+    <script src="https://unpkg.com/decap-cms@^3.8.3/dist/decap-cms.js"></script>
     <script type="module">
-      import setupCMS from './cms';
-      
-      // Wait for the CMS script to load and then initialize
-      function waitForCMS() {
-        if (window.CMS) {
-          console.log('CMS loaded:', window.CMS);
-          
-          try {
-            // Register custom components first
-            setupCMS(window.CMS);
-            console.log('Custom components registered');
-            
-            // Then initialize the CMS
-            window.CMS.init();
-            console.log('CMS initialized');
-          } catch (error) {
-            console.error('Error setting up CMS:', error);
-          }
-        } else {
-          // Check again in a short moment
-          setTimeout(waitForCMS, 100);
-        }
+      import setupCMS from '/src/pages/admin/cms.ts';
+      function go() {
+        if (window.CMS) setupCMS(window.CMS);
+        else setTimeout(go, 50);
       }
-      
-      // Start waiting for CMS to load
-      waitForCMS();
+      go();
     </script>
   </body>
 </html>
