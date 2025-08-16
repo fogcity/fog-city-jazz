@@ -11,7 +11,7 @@ const ctaLink = frontmatter.ctaLink ?? hero?.cta?.href
 ---
 
 <div
-  class="relative overflow-hidden rounded-xl h-[40vh] max-h-[400px] min-h-[200px]"
+  class="relative overflow-hidden rounded-xl h-[clamp(300px,40vh,400px)]"
 >
   {
     video ? (
@@ -34,9 +34,10 @@ const ctaLink = frontmatter.ctaLink ?? hero?.cta?.href
       />
     )
   }
+  <div class="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-transparent to-black/40"></div>
 
   <div
-    class="relative z-10 w-full h-full bg-gradient-to-b from-transparent to-black/40 p-4 sm:p-6 lg:p-8 flex flex-col justify-between"
+    class="relative z-20 w-full flex min-h-full flex-col p-4 sm:p-6 lg:p-8"
   >
     <!-- Top-left text -->
     <div class="max-w-lg">
@@ -45,19 +46,23 @@ const ctaLink = frontmatter.ctaLink ?? hero?.cta?.href
       >
         {title}
       </h1>
-      <p class="mt-2 text-lg sm:text-xl text-white/90 drop-shadow-sm">
-        {subtitle}
-      </p>
+      {subtitle && (
+        <p class="mt-2 md:mt-4 text-lg sm:text-xl text-white/90 drop-shadow-sm">
+          {subtitle}
+        </p>
+      )}
     </div>
 
     <!-- Bottom-right CTA -->
-    <div class="self-end">
+    {ctaText && ctaLink && (
+    <div class="self-end mt-auto">
       <a
         href={ctaLink}
         class="inline-block py-3 px-6 rounded-lg font-medium bg-white text-black shadow-md transition transform hover:shadow-xl hover:scale-105"
       >
-        {ctaText}
-      </a>
-    </div>
+          {ctaText}
+        </a>
+      </div>
+    )}
   </div>
 </div>

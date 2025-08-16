@@ -93,19 +93,22 @@ ${obj.content}
       },
       { name: "iframe", label: "Embed Code", widget: "text" },
     ],
-    pattern: /<SoundCloudEmbed([\s\S]*?)\/>/,
+    pattern: /<SoundCloudEmbed([\s\S]*?)>([\s\S]*?)<\/SoundCloudEmbed>/,
     fromBlock(match) {
       const attrs = match[1]
-      const title = getAttr(attrs, "title", "")
-      const description = getAttr(attrs, "description", "")
-      const iframe = getAttr(attrs, "iframe", "")
-      return { title, description, iframe }
+      return {
+        title: getAttr(attrs, "title", ""),
+        description: getAttr(attrs, "description", ""),
+        iframe: (match[2] ?? "").trim(),
+      }
     },
     toBlock(obj: any) {
       const title = obj.title ?? ""
       const description = obj.description ?? ""
       const iframe = obj.iframe ?? ""
-      return `<SoundCloudEmbed title="${title}" description="${description}" iframe="${iframe}" />`
+      return `<SoundCloudEmbed title="${title}" description="${description}">
+  ${iframe}
+  </SoundCloudEmbed>`
     },
     toPreview(obj: any) {
       const title = obj.title ? `<strong>${obj.title}</strong>` : ""
