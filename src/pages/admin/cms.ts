@@ -62,9 +62,9 @@ export default function setupCMS(CMS: any) {
       const width = obj.imageWidth ?? 50
       const left = obj.imageOnLeft ?? true
       const top = obj.topAlign ?? false
-      return `<ImageTextBlock src="${obj.src}" alt="${alt}" imageWidth="${width}" imageOnLeft="${left}" topAlign="${top}">
-${obj.content}
-</ImageTextBlock>`
+      return `<ImageTextBlock src="${obj.src}" alt="${alt}" imageWidth="${width}" imageOnLeft={${left}} topAlign={${top}}>
+    ${obj.content}
+    </ImageTextBlock>`
     },
     toPreview(obj: any) {
       const width = obj.imageWidth ?? 50

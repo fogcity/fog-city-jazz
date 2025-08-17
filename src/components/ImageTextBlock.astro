@@ -10,11 +10,11 @@ const textWidth = 100 - imageWidth
 ---
 
 <div
-  class={`image-text-block flex flex-col not-prose md:flex-row gap-4 md:gap-8 w-full ${topAlign ? "items-start" : "items-center"} ${imageOnLeft ? "" : "md:flex-row-reverse"}`}
+  class={`image-text-block flex flex-col not-prose md:flex-row gap-4 md:gap-8 w-full mb-8 md:mb-12 ${topAlign ? "items-start" : "items-center"} ${imageOnLeft ? "" : "md:flex-row-reverse"}`}
   style={`--image-width:${imageWidth}%; --text-width:${textWidth}%`}
 >
-  <img src={src} alt={alt} class="rounded w-full" />
-  <div class="w-full prose md:prose-lg">
+  <img src={src} alt={alt} class="rounded w-full">
+  <div class="w-full prose md:prose-lg !max-w-none">
     <slot />
   </div>
 </div>
